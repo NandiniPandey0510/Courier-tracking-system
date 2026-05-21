@@ -1,0 +1,51 @@
+{% include 'user_navigation.html' %}
+<style>
+    .abc{
+    border:2px solid blue;
+    padding: 30px;
+    border-radius:20px;
+    background:#999;
+    }
+    .box{margin-bottom:30px;}
+    .box2{
+    font:30px bold;
+    }
+</style>
+<marquee behavior="alternate" style="font-family: 'Monotype Corsiva'; font-size:25px; color:darkcyan; background-color:black; font-weight:bold; margin-top:1%">
+    Current Status Of Your Parcel
+</marquee>
+<form class="container mt-5 abc" method="post" >
+    {% csrf_token %}
+    <div class="row box">
+        <div class="col col-3" style="background:cyan;border-radius:10px;">
+            <label ><b>Current Status:</b></label>
+        </div>
+        <div class="col col-1"></div>
+        <div class="col col-8">
+            <label class="box2">{{data.parcel_status}} To {{data.name}}</label>
+        </div>
+    </div>
+    <div class="row box">
+        <div class="col col-3" style="background:cyan;border-radius:10px;">
+            <label ><b>Information:</b></label>
+        </div>
+        <div class="col col-1"></div>
+        <div class="col col-8">
+            <label class="box2">{{data.parcel_msg}}</label>
+        </div>
+    </div>
+    <div class="row box">
+        <div class="col col-3" style="background:cyan;border-radius:10px;">
+            <label ><b>Last Update Date:</b></label>
+        </div>
+        <div class="col col-1"></div>
+        <div class="col col-8">
+            <label class="box2">{{data.parcel_date}}</label>
+        </div>
+    </div>
+    <center>
+        <a href="{% url 'view_my_parcel' %}" class="btn btn-primary" style="margin-top:2%; color:darkcyan; background-color:black ; height:50px; font:30px bold;">Close</a>
+    </center>
+</form>
+
+{% include 'footer.html' %}

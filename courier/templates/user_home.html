@@ -1,0 +1,25 @@
+{% include 'user_navigation.html' %}
+{% load static %}
+
+
+<style>
+    .main{
+    border:2px solid blue;
+    height:450px;
+    background-image:url({% static 'images/cr3.jpg' %});
+    background-size:100% 100%;
+    animation: demo 10s infinite linear;
+    }
+    @keyframes demo{
+    20%{background-image:url({% static 'images/cr5.png' %});}
+    40%{background-image:url({% static 'images/cr2.png' %});}
+    60%{background-image:url({% static 'images/cr6.jpg' %});}
+    80%{background-image:url({% static 'images/cr4.png' %});}
+    100%{background-image:url({% static 'images/cr1.jpg' %});}
+    }
+</style>
+
+<div class="container-fluid main">
+
+</div>
+{% include 'footer.html' %}

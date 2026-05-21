@@ -1,0 +1,64 @@
+{% include 'user_navigation.html' %}
+
+<marquee behavior="alternate" style="font-family: 'Monotype Corsiva'; font-size:25px; color:darkcyan; background-color:black; font-weight:bold; margin-top:1%">
+    My Parcel
+</marquee>
+<hr>
+
+<div class="container-fluid">
+<table class="table table-hover " id="example">
+    <thead>
+    <tr style="background-color: lightgreen; color : black">
+        <th>Full Name</th>
+        <th>Email ID</th>
+        <th>Contact</th>
+        <th>Parcel Type</th>
+        <th>Parcel ID</th>
+        <th>Id Proof</th>
+        <th style="text-align:center;">Status</th>
+    </tr>
+    </thead>
+    <tbody style="background-color:lightblue; color: black">
+    {% for i in data %}
+    {% if i.email == user.username %}
+    <tr>
+        <td>{{i.first_name}} {{i.last_name}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.mobile}}</td>
+        <td>{{i.parcel_type}}</td>
+        <td>{{i.parcel_id}}</td>
+        <td>{{i.gov_id}}</td>
+        {% if i.status == "Pending" %}
+        <td><a href="#" class="btn btn-secondary">{{i.status}}</a> </td>
+        {% endif %}
+        {% if i.status == "Confirm" %}
+        <td align="center"><a href="#" class="btn btn-success"><i class="fa-solid fa-circle-check"></i></a>
+            {% if i.parcel_id is not None %}
+            <a href="{% url 'invoice' i.id %}" class="btn btn-dark btn-sm">Invoice</a>
+            <a href="{% url 'check_status_user' i.parcel_id %}" class="btn btn-primary">Check Status</a>
+            {% endif %}
+
+        {% if i.parcel_id is None and i.test is None %}
+        <a href="{% url 'pay_now' i.id %}" class="btn btn-primary">Pay {{i.weight}}00</a>
+        {% endif %}
+        {% endif %}
+            {% if i.test is not None and i.parcel_id is None %}
+                <a href="{% url 'sender_detail' i.id %}" class="btn btn-primary">Generate ID</a>
+            {% endif %}
+        </td>
+        {% if i.status == "Canceled" %}
+        <td>
+        <a href="#" class="btn btn-secondary">{{i.status}}</a>
+        <a href="{% url 'delete_parcel' i.id %}" class="btn btn-danger">Delete</a>
+        </td>
+        {% endif %}
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% include 'footer.html' %}
+
+

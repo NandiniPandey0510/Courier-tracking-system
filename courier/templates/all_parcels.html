@@ -1,0 +1,43 @@
+{% include 'admin_navigation.html' %}
+
+<marquee behavior="alternate" class="mt-3" style="background:black;font-size:30px;color:cyan;font-family:calibiry;">
+    ALL Parcel
+</marquee>
+<div class="container-fluid">
+    <form action="/search" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" type="search">
+        <input type="submit" class="btn btn-primary btn-sm">
+        <a href="{% url 'all_parcels' %}" class="btn btn-secondary btn-sm">Back</a>
+    </form>
+    <table class="table table-stripped table-hover">
+    <tr bgcolor="pink">
+        <th>S.No.</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Weight & Distance</th>
+        <th>Address</th>
+        <th style="text-align:center;">Status</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.full_name}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.mobile}}</td>
+        <td>{{i.gov_id}}<br>{{i.gov_id_no}}</td>
+        <td>{{i.parcel_type}}</td>
+        <td>{{i.parcel_weight}}KG<br>{{i.parcel_distance}}KM</td>
+        <td>{{i.sender_add}}</td>
+        <td style="text-align:center;"><a href="{% url 'delete_parcel_admin' i.id %}" class="btn btn-danger btn-sm" title="Delete Request"><i class="fas fa-trash-alt"></i></a> | <a href="{% url 'change_status' i.id %}" class="btn btn-secondary btn-sm">{{i.status}}</a>
+        {% if i.parcel_id is not None %}
+            <a href="{% url 'change_parcel_status' i.parcel_id %}" class="btn btn-primary btn-sm">Change Status</a>
+        {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>

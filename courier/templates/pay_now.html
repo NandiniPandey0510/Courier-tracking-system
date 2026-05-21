@@ -1,0 +1,56 @@
+{% include 'user_navigation.html' %}
+{% load static %}
+<marquee class="mt-3" scrolldelay="50">ITS FAKE PAYMENT PAGE. WE DONOT STORE YOUR DATA</marquee>
+<marquee scrolldelay="50">ITS JUST FOR DEMO</marquee>
+
+
+<form action="" method="post">
+    {% csrf_token %}
+<div class="container mt-3" style="border:5px solid black;width:600px;">
+    <div class="row">
+        <h2 class="bg-dark text-white mt-2" style="border-radius:20%;margin-left:190px;">Payment Detail</h2>
+        <div class="col-12">
+            <label>Enter Card Number:</label>
+            <input type="text" class="form-control" placeholder="Enter Your Card Number..." name="cno" required>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+
+        <div class="col-12">
+            <label>Account Holder Name:</label>
+            <input type="text" class="form-control" placeholder="Account Holder Full Name" name="fname" required>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-3">
+            <label>Month:</label>
+            <input type="text" class="form-control" placeholder="MM" name="month" required>
+        </div>
+        <div class="col-3">
+            <label>Year:</label>
+            <input type="text" class="form-control" placeholder="YY" name="year" required>
+        </div>
+        <div class="col-6">
+            <label>CVV Code:-</label>
+            <input type="text" class="form-control" placeholder="CVV" name="cvv" required>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-primary" style="width:90%;margin:20px;" value="Pay Rs.{{data.weight}}00">
+</div>
+</form>
+
+{% if error == "no" %}
+<script>
+    alert("Payment Successfully")
+    window.location = ('{% url 'view_my_parcel' %}')
+</script>
+{% endif %}
+
+<!--{% if error == "yes" %}-->
+<!--<script>-->
+<!--    alert("Something Wrong, Try Again...")-->
+<!--</script>-->
+<!--{% endif %}-->
+

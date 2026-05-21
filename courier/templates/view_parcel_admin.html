@@ -1,0 +1,68 @@
+{% include 'admin_navigation.html' %}
+
+<marquee behavior="alternate" style="font-family: 'Monotype Corsiva'; font-size:25px; color:darkcyan; background-color:black; font-weight:bold; margin-top:1%">
+    All Parcel Request
+</marquee>
+<hr>
+
+<div class="container-fluid">
+<table class="table table-hover " id="example">
+    <thead>
+    <tr style="background-color: lightgreen; color : black">
+        <th>S.No.</th>
+        <th>Full Name</th>
+        <th>Email ID</th>
+        <th>Contact</th>
+        <th>Parcel Type</th>
+        <th>Parcel Weight</th>
+        <th>Id Proof</th>
+        <th style="text-align:center;">Change Status</th>
+    </tr>
+    </thead>
+    <tbody style="background-color:lightblue; color: black">
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.first_name}} {{i.last_name}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.mobile}}</td>
+        <td>{{i.parcel_type}}</td>
+        <td align="center">{{i.weight}}KG</td>
+        <td>{{i.gov_id}}<br>{{i.gov_no}}</td>
+        <td style="padding-right:0px;" align="right">
+            {% if i.status == "Pending" %}
+            <a href="{% url 'change_status' i.id %}" class="btn btn-secondary">{{i.status}}</a>
+            {% endif %}
+            {% if i.status == "Confirm" %}
+            <a href="{% url 'change_status' i.id %}" class="btn btn-success"><i class="fa-solid fa-circle-check"></i></a>
+            {% endif %}
+            {% if i.status == "Cancelled" %}
+        <a href="{% url 'change_status' i.id %}" class="btn btn-secondary">{{i.status}}</a>
+        {% endif %}
+
+         {% for j in data2%}
+            {% if i.parcel_id == j.parcel_id %}
+               {% if j.parcel_status == "Delivered" %}
+                 <a href="" class="btn btn-primary">Delivered Successfully</a>
+                {% endif %}
+                {% if j.parcel_status == "Confirm" %}
+                <a href="{% url 'change_track_status' i.parcel_id %}" class="btn btn-danger">Change Track Status</a></td>
+                {% endif %}
+
+			{% if i.parcel_id is not None %}
+     	       <a href="{% url 'change_track_status' i.parcel_id %}" class="btn btn-primary btn-sm">Change Status</a>
+	        {% endif %}
+
+            {% endif %}
+         {% endfor %}
+
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+</div>
+
+
+
+{% include 'footer.html' %}

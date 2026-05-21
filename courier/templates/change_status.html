@@ -1,0 +1,37 @@
+{% include 'admin_navigation.html' %}
+
+
+<marquee behavior="alternate" style="font-family: 'Monotype Corsiva'; font-size:25px; color:darkcyan; background-color:black; font-weight:bold; margin-top:1%">
+        Change Parcel Status
+</marquee>
+<hr>
+
+<form class="container mt-5" method="post">
+    {% csrf_token %}
+    <label><b>Sender Name:</b></label>
+    <input type="text" class="form-control" name="uname" value="{{booking.first_name}}  {{booking.last_name}}">
+    <label><b>Status:</b></label>
+    <select class="form-control" name="rstatus">
+         <option value="Confirm">Confirm</option>
+        <option value="Canceled">Cancel</option>
+    </select>
+<center>
+    <input type="submit" class="btn btn-primary" style="margin-top:2%; color:darkcyan; background-color:black ; height:50px; font-size:25px">
+</center>
+</form>
+{% if error == "no" %}
+<script>
+    alert("Status Changed Successfully")
+    window.location = ('{% url 'view_parcel_admin' %}')
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something went wrong, Try Again")
+</script>
+{% endif %}
+
+
+{% include 'footer.html' %}
+

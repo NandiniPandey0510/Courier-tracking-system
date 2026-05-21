@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Page</title>
+  <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar .icon img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px;
+  display: block;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background-color: #333;
+  border-color: #fff;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 40px;
+  background-color: #fff;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="sidebar">
+      <div class="icon">
+        <img src="parcel-icon.png" alt="Parcel Icon">
+      </div>
+      <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+      </ul>
+    </nav>
+    <main class="content">
+      <h1>About Us</h1>
+      <p>Welcome to our website! We are committed to providing excellent service and quality products to our customers. Explore our site to learn more about what we offer.</p>
+    </main>
+  </div>
+</body>
+</html>

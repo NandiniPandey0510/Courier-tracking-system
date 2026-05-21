@@ -1,0 +1,41 @@
+{% include 'navigation.html' %}
+
+<marquee behavior="alternate" style="font-family: 'Monotype Corsiva'; font-size:25px; color:darkcyan; background-color:black; font-weight:bold; margin-top:1%">
+    Track Your Parcel Status
+</marquee>
+<style>
+    .abc{
+    border:2px solid blue;
+    padding:30px;
+    border-radius:30px;
+    margin-bottom:100px;
+    }
+    .box{
+    margin-bottom:30px;
+    }
+
+</style>
+<form class="container mt-5 abc" method="post" >
+    {% csrf_token %}
+    <div class="row">
+        <div class="col col-3 box" style="background:cyan; border-radius:10px;">
+            <label style="font-size:30px;font-family:calibri;"><i>Enter Parcel Id:</i></label>
+        </div>
+        <div class="col col-9 box">
+            <input type="text" class="form-control" name="vid" style="height:50px;" placeholder="Input Here Your Parcel ID to Track" required>
+        </div>
+
+    </div>
+    <center>
+        <input type="submit" class="btn btn-primary" value="Track Parcel" style="margin-top:2%; color:darkcyan; background-color:black ; height:50px; font:30px bold;">
+    </center>
+</form>
+
+{% if error == "no" %}
+<script>
+    alert("Please Input Valid Parcel ID")
+    window.location = ('{% url 'track_parcel' %}')
+</script>
+{% endif %}
+
+
